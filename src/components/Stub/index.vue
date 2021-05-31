@@ -65,9 +65,11 @@
     left: 0;
     z-index: 1000;
     filter: url('#goo');
+    margin: 16px;
   }
 
   .stub-page__cursor span {
+    margin: 16px;
     position: absolute;
     display: block;
     width: 26px;
