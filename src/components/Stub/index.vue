@@ -1,5 +1,4 @@
 <template>
-
   <div class="stub-page">
     <div class="stub-page__container">
       <img class="stub-page__logo" src="@/assets/svg/vandal-logo.svg" alt="vandal-logo">
@@ -41,13 +40,15 @@
   }
 
   .stub-page {
+    height: 100vh;
+    width: 100vw;
+    min-height: 420px;
     cursor: none;
     user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    background-color: #F37668;
     background-image: url(~@/assets/svg/vandal-large.svg);
     background-size: cover;
     background-position: center;

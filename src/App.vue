@@ -14,7 +14,6 @@ export default {
 </script>
 
 <style>
-
   @font-face {
     font-family: "EB Garamond";
     src: local("EB Garamond"),
@@ -29,9 +28,5 @@ export default {
   #app {
     font-family: 'EB Garamond', serif;
     font-size: 16px;
-    background-color: #F37668;
-
-    height: 100vh;
-    width: 100vw;
   }
 </style>
