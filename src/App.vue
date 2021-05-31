@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Stub/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Stub from './components/Stub/index'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Stub
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  @font-face {
+    font-family: "EB Garamond";
+    src: local("EB Garamond"),
+    url(./assets/fonts/EBGaramond-Regular.ttf) format("truetype");
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  #app {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    background-color: #F37668;
+
+    height: 100vh;
+    width: 100vw;
+  }
 </style>
