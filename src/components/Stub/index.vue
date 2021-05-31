@@ -40,6 +40,7 @@
   }
 
   .stub-page {
+    overflow: hidden;
     height: 100vh;
     width: 100vw;
     min-height: 420px;
