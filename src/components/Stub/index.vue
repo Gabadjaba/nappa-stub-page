@@ -1,5 +1,5 @@
 <template>
-  <div class="stub-page">
+  <div class="stub-page" ref="stubPage">
     <div class="stub-page__container">
       <img class="stub-page__logo" src="@/assets/svg/vandal-logo.svg" alt="vandal-logo">
       <p class="stub-page__text"> Coming Soon </p>
@@ -20,11 +20,15 @@
 
 <script>
   import cursor from '@/utils/cursor';
+  import { detectMobile } from '@/utils';
 
   export default {
     name: "Stub",
     mounted() {
-      cursor(document.getElementById("cursor"));
+      if (!detectMobile()) {
+        this.$refs.stubPage.style.cursor = 'none';
+        cursor(document.getElementById("cursor"));
+      }
     }
   }
 </script>
@@ -44,7 +48,6 @@
     height: 100vh;
     width: 100vw;
     min-height: 420px;
-    cursor: none;
     user-select: none;
     display: flex;
     align-items: center;
@@ -66,11 +69,9 @@
     left: 0;
     z-index: 1000;
     filter: url('#goo');
-    margin: 16px;
   }
 
   .stub-page__cursor span {
-    margin: 16px;
     position: absolute;
     display: block;
     width: 26px;
