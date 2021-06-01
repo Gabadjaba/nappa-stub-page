@@ -5,30 +5,42 @@
       <p class="stub-page__text"> Coming Soon </p>
     </div>
   </div>
-  <div id="cursor" class="stub-page__cursor"/>
-
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="800">
-    <defs>
-      <filter id="goo">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -15" result="goo" />
-        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-      </filter>
-    </defs>
-  </svg>
+  <div
+      class="stub-page__cursor"
+      ref="cursor">
+  </div>
 </template>
 
 <script>
-  import cursor from '@/utils/cursor';
-  import { detectMobile } from '@/utils';
+  import Kinet from 'kinet';
 
   export default {
     name: "Stub",
-    mounted() {
-      if (!detectMobile()) {
-        this.$refs.stubPage.style.cursor = 'none';
-        cursor(document.getElementById("cursor"));
+    methods: {
+      cursorInit(){
+        // create instance of kinet with custom settings
+        const kinet = new Kinet({
+          acceleration: 0.06,
+          friction: 0.20,
+          names: ["x", "y"],
+        });
+
+        const cursor = this.$refs.cursor
+
+        // set handler on kinet tick event
+        kinet.on('tick', function(instances) {
+          cursor.style.transform = `translate3d(${ (instances.x.current) }px, ${ (instances.y.current) }px, 0) rotateX(${ (instances.x.velocity/2) }deg) rotateY(${ (instances.y.velocity/2) }deg)`;
+        });
+
+        // call kinet animate method on mousemove
+        document.addEventListener('mousemove', function (event) {
+          kinet.animate('x', event.clientX - window.innerWidth/2);
+          kinet.animate('y', event.clientY - window.innerHeight/2);
+        });
       }
+    },
+    mounted() {
+      this.cursorInit()
     }
   }
 </script>
@@ -44,6 +56,7 @@
   }
 
   .stub-page {
+    cursor: none;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
@@ -59,27 +72,19 @@
   }
 
   .stub-page__cursor {
-    pointer-events: none;
-    position: fixed;
-    display: block;
-    border-radius: 0;
-    transform-origin: center center;
-    mix-blend-mode: difference;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    filter: url('#goo');
-  }
+    --size: 120px;
 
-  .stub-page__cursor span {
-    position: absolute;
-    display: block;
-    width: 26px;
-    height: 26px;
-    border-radius: 20px;
-    background-color: white;
-    transform-origin: center center;
-    transform: translate(-50%, -50%);
+    width: var(--size);
+    height: var(--size);
+    background: white;
+    border-radius: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: calc(var(--size) / 2 - var(--size) / 2 * 2) 0 0 calc(var(--size) / 2 - var(--size) / 2 * 2);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 10;
   }
 
 
