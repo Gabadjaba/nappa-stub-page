@@ -20,8 +20,8 @@
       cursorInit(){
         // create instance of kinet with custom settings
         const kinet = new Kinet({
-          acceleration: 0.06,
-          friction: 0.20,
+          acceleration: 0.03,
+          friction: 0.10,
           names: ["x", "y"],
         });
 
@@ -56,6 +56,7 @@
   }
 
   .stub-page {
+    touch-action: none;
     cursor: none;
     overflow: hidden;
     height: 100vh;
